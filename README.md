@@ -4,6 +4,8 @@
 
 O teste consiste em criar uma Web Application para simulação de empréstimo para pessoa física.
 
+### Você pode acessar o deploy em produção, através deste link: <a href="https://teste-tecnico-letalk-frontend.vercel.app/">Link de acesso</a>
+
 ## Requisitos
 
 - Node.js;
@@ -11,6 +13,7 @@ O teste consiste em criar uma Web Application para simulação de empréstimo pa
 ## Tecnologias
 
 - React.js;
+- React Router Dom;
 - TypeScript;
 - React Query;
 - React Hook Form;
