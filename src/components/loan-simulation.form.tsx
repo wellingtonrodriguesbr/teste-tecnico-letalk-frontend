@@ -65,6 +65,7 @@ export function LoanSimulationForm() {
       /\D/g,
       ""
     );
+    const customerBirthDate = values.customerBirthDate.replace(/\D/g, "");
     const loanAmountRequested = values.loanAmountRequested.replace(
       /[^\d]/g,
       ""
@@ -78,7 +79,7 @@ export function LoanSimulationForm() {
       await requestNewLoan({
         customerDocumentNumber,
         customerState: values.customerState,
-        customerBirthDate: values.customerBirthDate,
+        customerBirthDate,
         loanAmountRequested: parseInt(loanAmountRequested),
         desiredInstallmentAmount: parseInt(desiredInstallmentAmount),
       });
@@ -174,7 +175,10 @@ export function LoanSimulationForm() {
                   placeholder="DATA DE NASCIMENTO"
                   {...field}
                   onChange={({ currentTarget }) =>
-                    form.setValue("customerBirthDate", currentTarget.value)
+                    form.setValue(
+                      "customerBirthDate",
+                      currentTarget.value.replace(/\D/g, "")
+                    )
                   }
                   value={formatDate(field.value)}
                 />
