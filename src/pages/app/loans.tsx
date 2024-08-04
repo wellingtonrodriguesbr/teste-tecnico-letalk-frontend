@@ -1,24 +1,27 @@
 import { LoansTable } from "@/components/loans-table";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { Link } from "react-router-dom";
 
 export function Loans() {
+  function handleNavigate() {
+    window.location.href = "/";
+  }
+
   return (
-    <div className="w-full max-w-screen-2xl mx-auto px-4 space-y-6">
-      <header className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Todos os empréstimos efetivados</h1>
+    <section className="w-full max-w-screen-2xl mx-auto px-4 space-y-12">
+      <header className="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <h1 className="text-2xl md:text-3xl font-bold text-center">
+          Todos os empréstimos efetivados
+        </h1>
         <Button
-          className="gap-2 bg-app-green-500 hover:bg-app-green-500 hover:brightness-95 font-bold"
-          asChild
+          onClick={handleNavigate}
+          className="w-full md:w-fit gap-2 bg-app-green-500 hover:bg-app-green-500 hover:brightness-95 font-bold"
         >
-          <Link to="/">
-            <Plus className="size-4" />
-            Solicitar novo
-          </Link>
+          <Plus className="size-4" />
+          Solicitar novo
         </Button>
       </header>
       <LoansTable />
-    </div>
+    </section>
   );
 }

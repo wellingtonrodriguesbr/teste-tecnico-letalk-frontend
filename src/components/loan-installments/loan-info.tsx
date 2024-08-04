@@ -40,12 +40,12 @@ export function LoanInfo() {
   ];
 
   return (
-    <ul className="grid grid-cols-3 gap-[4.375rem]">
+    <ul className="grid grid-cols-2 xl:grid-cols-3 gap-6 md:gap-[4.375rem]">
       {loanInfoItems.map((item, index) => (
         <LoanInfoItem
           key={index}
           description={item.description}
-          value={item.value}
+          value={item.value ?? ""}
         />
       ))}
     </ul>

@@ -16,12 +16,12 @@ export function LoanInstallments() {
       className="w-full mt-[4.5rem] data-[hidden=true]:hidden"
     >
       <header className="flex items-center justify-center">
-        <h3 className="font-bold text-xl mb-[1.625rem]">
+        <h3 className="font-bold text-lg md:text-xl mb-[1.625rem] text-center">
           Veja a simulação para o seu empréstimo antes de efetivar
         </h3>
       </header>
 
-      <div className="flex flex-col items-center gap-[4.56rem] rounded-[5px] border shadow-sm bg-white p-10">
+      <div className="flex flex-col items-center gap-[4.56rem] rounded-[5px] border shadow-sm bg-white p-6 md:p-10">
         <LoanInfo />
 
         <div className="w-full space-y-4">

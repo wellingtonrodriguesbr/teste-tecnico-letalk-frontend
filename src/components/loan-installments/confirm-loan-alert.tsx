@@ -37,17 +37,17 @@ export function ConfirmLoanAlert({ loanId }: ConfirmLoanAlertProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="w-full max-w-[554px] uppercase text-base font-bold tracking-widest bg-app-green-500 hover:bg-app-green-500 hover:brightness-95 shadow-lg gap-2">
+        <Button className="w-full max-w-[554px] uppercase text-sm md:text-base font-bold tracking-widest bg-app-green-500 hover:bg-app-green-500 hover:brightness-95 shadow-lg gap-2">
           Efetivar o empréstimo <ArrowRight className="size-4" />
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="w-[370px] rounded-[5px] md:w-full">
         <AlertDialogHeader>
           <AlertDialogTitle>
             Tem certeza que deseja efetivar este empréstimo?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Após a confirmação, esta ação não poderá ser mais desfeita.
+            Após a confirmação, esta ação não poderá ser desfeita.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

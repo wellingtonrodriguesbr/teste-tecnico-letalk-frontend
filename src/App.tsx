@@ -10,7 +10,7 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <LoanContextProvider>
         <RouterProvider router={router} />
-        <Toaster richColors position="top-center" />
+        <Toaster richColors position="bottom-center" />
       </LoanContextProvider>
     </QueryClientProvider>
   );

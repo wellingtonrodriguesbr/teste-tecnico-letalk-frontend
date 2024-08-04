@@ -1,5 +1,6 @@
 "use client";
 
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -18,27 +19,29 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-import { z } from "zod";
 import { formatCPF } from "@/utils/format-cpf";
 import { formatCurrency } from "@/utils/format-currency";
 import { useRequestNewLoan } from "@/hooks/use-request-new-loan";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { AxiosError } from "axios";
+import { formatDate } from "@/utils/format-date";
 
 const loanSimulationFormSchema = z.object({
   customerDocumentNumber: z
     .string()
     .min(11, { message: "Digite um CPF válido" })
     .max(11, { message: "Digite um CPF válido" }),
-  customerState: z.string(),
+  customerState: z.string().min(2, { message: "Selecione a UF do seu estado" }),
   customerBirthDate: z
     .string()
-    .min(2, { message: "Selecione a sua data de nascimento" }),
+    .min(8, { message: "Digite sua data de nascimento. Ex: 12/02/1989" }),
   loanAmountRequested: z.coerce
     .string()
-    .min(12, { message: "O valor mínimo para empréstimo é de R$ 50.000,00" }),
-  desiredInstallmentAmount: z.coerce.string(),
+    .min(2, { message: "O valor mínimo para empréstimo é de R$ 50.000,00" }),
+  desiredInstallmentAmount: z.coerce
+    .string()
+    .min(2, { message: "O valor mínimo é de 1% do valor do empréstimo" }),
 });
 
 type LoanSimulationFormSchema = z.infer<typeof loanSimulationFormSchema>;
@@ -50,8 +53,8 @@ export function LoanSimulationForm() {
       customerDocumentNumber: "",
       customerState: "",
       customerBirthDate: "",
-      loanAmountRequested: "0",
-      desiredInstallmentAmount: "0",
+      loanAmountRequested: "",
+      desiredInstallmentAmount: "",
     },
   });
 
@@ -79,7 +82,30 @@ export function LoanSimulationForm() {
 
       toast.success("Simulação realizada com sucesso");
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        if (
+          error.response?.status === 400 &&
+          error.response.data.message.includes("The minimum loan amount is")
+        ) {
+          toast.error("O valor mínimo para empréstimo é de R$ 50.000,00");
+        }
+        if (
+          error.response?.status === 400 &&
+          error.response.data.message.includes(
+            "The minimum installment amount is"
+          )
+        ) {
+          toast.error(
+            "O valor mínimo de parcela é de 1% do valor do empréstimo"
+          );
+        }
+        if (
+          error.response?.status === 400 &&
+          error.response.data.message === "Invalid date"
+        ) {
+          toast.error("Data de nascimento inválida");
+        }
+      }
     }
   }
 
@@ -87,7 +113,7 @@ export function LoanSimulationForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full flex flex-col gap-3 bg-white border rounded-[5px] shadow-sm px-8 pt-[4.375rem] pb-[2.375rem]"
+        className="w-full flex flex-col gap-3 bg-white border rounded-[5px] shadow-sm p-6 md:px-8 md:pt-[4.375rem] md:pb-[2.375rem]"
       >
         <FormField
           control={form.control}
@@ -116,7 +142,9 @@ export function LoanSimulationForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="UF" />
+                    <SelectValue placeholder="UF">
+                      <span className="text-black">{field.value}</span>
+                    </SelectValue>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -138,8 +166,11 @@ export function LoanSimulationForm() {
               <FormControl>
                 <Input
                   placeholder="DATA DE NASCIMENTO"
-                  type="date"
                   {...field}
+                  onChange={({ currentTarget }) =>
+                    form.setValue("customerBirthDate", currentTarget.value)
+                  }
+                  value={formatDate(field.value)}
                 />
               </FormControl>
               <FormMessage />
@@ -191,7 +222,7 @@ export function LoanSimulationForm() {
           type="submit"
           size="lg"
           disabled={isRequestNewLoanPending}
-          className="w-full uppercase text-base font-bold tracking-widest bg-app-orange-500 hover:bg-app-orange-500 hover:brightness-95 mt-7 shadow-lg"
+          className="w-full uppercase text-sm md:text-base font-bold tracking-widest bg-app-orange-500 hover:bg-app-orange-500 hover:brightness-95 mt-4 md:mt-7 shadow-lg"
         >
           {isRequestNewLoanPending ? (
             <Loader2 className="size-4 animate-spin" />
