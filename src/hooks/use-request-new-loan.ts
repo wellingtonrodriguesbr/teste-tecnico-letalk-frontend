@@ -41,7 +41,7 @@ export function useRequestNewLoan() {
 
     setLoan(data.loan);
     window.scrollTo({
-      top: height * 2,
+      top: (height * 2) / 4,
       behavior: "smooth",
     });
     return data;
