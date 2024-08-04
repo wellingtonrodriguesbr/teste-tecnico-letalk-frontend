@@ -22,7 +22,11 @@ interface GetInstallmentsByLoanResponse {
 export function useGetInstallmentsByLoan({
   loanId,
 }: GetInstallmentsByLoanProps) {
-  const { data: installments, isPending: isGetInstallmentsPending } = useQuery({
+  const {
+    data: installments,
+    isPending: isGetInstallmentsPending,
+    isFetching,
+  } = useQuery({
     queryKey: ["installments", loanId],
     queryFn: () => handleGetInstallments({ loanId }),
     enabled: !!loanId?.length,
@@ -35,5 +39,9 @@ export function useGetInstallmentsByLoan({
     return data.installments;
   }
 
-  return { installments: installments ?? [], isGetInstallmentsPending };
+  return {
+    installments: installments ?? [],
+    isGetInstallmentsPending,
+    isFetching,
+  };
 }
