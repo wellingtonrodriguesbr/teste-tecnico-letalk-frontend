@@ -61,12 +61,14 @@ export function LoanSimulationForm() {
   const { requestNewLoan, isRequestNewLoanPending } = useRequestNewLoan();
 
   async function onSubmit(values: LoanSimulationFormSchema) {
-    console.log(values);
+    const customerDocumentNumber = values.customerDocumentNumber.replace(
+      /\D/g,
+      ""
+    );
     const loanAmountRequested = values.loanAmountRequested.replace(
       /[^\d]/g,
       ""
     );
-
     const desiredInstallmentAmount = values.desiredInstallmentAmount.replace(
       /[^\d]/g,
       ""
@@ -74,7 +76,7 @@ export function LoanSimulationForm() {
 
     try {
       await requestNewLoan({
-        customerDocumentNumber: values.customerDocumentNumber,
+        customerDocumentNumber,
         customerState: values.customerState,
         customerBirthDate: values.customerBirthDate,
         loanAmountRequested: parseInt(loanAmountRequested),
@@ -126,7 +128,10 @@ export function LoanSimulationForm() {
                   placeholder="CPF"
                   {...field}
                   onChange={({ currentTarget }) =>
-                    form.setValue("customerDocumentNumber", currentTarget.value)
+                    form.setValue(
+                      "customerDocumentNumber",
+                      currentTarget.value.replace(/\D/g, "")
+                    )
                   }
                   value={formatCPF(field.value)}
                 />
