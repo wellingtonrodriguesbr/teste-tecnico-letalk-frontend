@@ -1,6 +1,7 @@
 import { Loan, useLoan } from "@/contexts/loan-context";
 import { api } from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
+import { useWindowSize } from "react-use";
 
 interface RequestNewLoanProps {
   customerDocumentNumber: string;
@@ -15,6 +16,7 @@ interface RequestNewLoanResponse {
 }
 
 export function useRequestNewLoan() {
+  const { height } = useWindowSize();
   const { setLoan } = useLoan();
 
   const { mutateAsync: requestNewLoan, isPending: isRequestNewLoanPending } =
@@ -38,6 +40,10 @@ export function useRequestNewLoan() {
     });
 
     setLoan(data.loan);
+    window.scrollTo({
+      top: height * 2,
+      behavior: "smooth",
+    });
     return data;
   }
 
