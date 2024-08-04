@@ -67,34 +67,34 @@ export function LoansTable() {
             {!isGetConfirmedLoansPending &&
               confirmedloans.map((loan) => (
                 <TableRow key={loan.id}>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {formatCPF(loan.customerDocumentNumber)}
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {dayjs(loan.customerBirthDate).format("DD/MM/YYYY")}
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {loan.customerState}
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {formatCurrency(loan.loanAmountRequested?.toString())}
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {parseFloat((loan.interestRate * 100).toFixed(1))}%
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {formatCurrency(loan.desiredInstallmentAmount?.toString())}
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {loan.installments}x
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {formatCurrency(loan.totalInterestRateAmount?.toString())}
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {formatCurrency(loan.totalAmount?.toString())}
                   </TableCell>
-                  <TableCell className="text-app-gray-800 font-normal text-base text-nowrap">
+                  <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {dayjs(loan.createdAt).format("DD/MM/YYYY")}
                   </TableCell>
                 </TableRow>
