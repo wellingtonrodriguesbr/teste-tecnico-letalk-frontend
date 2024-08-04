@@ -77,8 +77,8 @@ export function LoanSimulationForm() {
         customerDocumentNumber: values.customerDocumentNumber,
         customerState: values.customerState,
         customerBirthDate: values.customerBirthDate,
-        loanAmountRequested: Number(loanAmountRequested),
-        desiredInstallmentAmount: Number(desiredInstallmentAmount),
+        loanAmountRequested: parseInt(loanAmountRequested),
+        desiredInstallmentAmount: parseInt(desiredInstallmentAmount),
       });
 
       toast.success("Simulação realizada com sucesso");

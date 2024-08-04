@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 export interface LoanInstallment {
   id: string;
-  outstandingBalance: number;
-  interest: number;
-  adjustedBalance: number;
-  installmentAmount: number;
+  outstandingBalance: string;
+  interest: string;
+  adjustedBalance: string;
+  installmentAmount: string;
   dueDate: string;
   loanId: string;
 }

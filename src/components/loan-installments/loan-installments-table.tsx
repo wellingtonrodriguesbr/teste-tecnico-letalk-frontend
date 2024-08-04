@@ -46,16 +46,16 @@ export function LoanInstallmentsTable({
           installments.map((installment) => (
             <TableRow key={installment.id}>
               <TableCell className="text-app-gray-800 font-normal text-sm md:text-base">
-                {formatCurrency(installment.outstandingBalance?.toString())}
+                {formatCurrency(installment.outstandingBalance)}
               </TableCell>
               <TableCell className="text-app-gray-800 font-normal text-sm md:text-base">
-                {formatCurrency(installment.interest?.toString())}
+                {formatCurrency(installment.interest)}
               </TableCell>
               <TableCell className="text-app-gray-800 font-normal text-sm md:text-base">
-                {formatCurrency(installment.adjustedBalance?.toString())}
+                {formatCurrency(installment.adjustedBalance)}
               </TableCell>
               <TableCell className="text-app-gray-800 font-normal text-sm md:text-base">
-                {formatCurrency(installment.installmentAmount?.toString())}
+                {formatCurrency(installment.installmentAmount)}
               </TableCell>
               <TableCell className="text-app-gray-800 font-normal text-sm md:text-base">
                 {dayjs(installment.dueDate).format("DD/MM/YY")}
