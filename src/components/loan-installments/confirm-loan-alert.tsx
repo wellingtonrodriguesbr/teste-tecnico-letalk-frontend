@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useConfirmLoan } from "@/hooks/use-confirm-loan";
+import { AxiosError } from "axios";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 interface ConfirmLoanAlertProps {
   loanId: string;
@@ -30,7 +32,12 @@ export function ConfirmLoanAlert({ loanId }: ConfirmLoanAlertProps) {
 
       navigate("/sucesso");
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 404) {
+          toast.error("Empréstimo não encontrado, tente novamente.");
+        }
+      }
+      toast.error("Falha ao efetivar empréstimo, tente novamente.");
     }
   }
 

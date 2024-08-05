@@ -30,8 +30,7 @@ import { formatDate } from "@/utils/format-date";
 const loanSimulationFormSchema = z.object({
   customerDocumentNumber: z
     .string()
-    .min(11, { message: "Digite um CPF válido" })
-    .max(14, { message: "Digite um CPF válido" }),
+    .min(11, { message: "Digite um CPF válido" }),
   customerState: z.string().min(2, { message: "Selecione a UF do seu estado" }),
   customerBirthDate: z
     .string()
@@ -110,6 +109,8 @@ export function LoanSimulationForm() {
           toast.error("Data de nascimento inválida");
         }
       }
+
+      toast.error("Falha ao realizar simulação, tente novamente.");
     }
   }
 
