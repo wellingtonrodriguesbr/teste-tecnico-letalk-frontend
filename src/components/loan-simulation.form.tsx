@@ -91,8 +91,7 @@ export function LoanSimulationForm() {
           error.response.data.message.includes("The minimum loan amount is")
         ) {
           toast.error("O valor mínimo para empréstimo é de R$ 50.000,00");
-        }
-        if (
+        } else if (
           error.response?.status === 400 &&
           error.response.data.message.includes(
             "The minimum installment amount is"
@@ -101,16 +100,15 @@ export function LoanSimulationForm() {
           toast.error(
             "O valor mínimo de parcela é de 1% do valor do empréstimo"
           );
-        }
-        if (
+        } else if (
           error.response?.status === 400 &&
           error.response.data.message === "Invalid date"
         ) {
           toast.error("Data de nascimento inválida");
+        } else {
+          toast.error("Falha ao realizar simulação, tente novamente.");
         }
       }
-
-      toast.error("Falha ao realizar simulação, tente novamente.");
     }
   }
 

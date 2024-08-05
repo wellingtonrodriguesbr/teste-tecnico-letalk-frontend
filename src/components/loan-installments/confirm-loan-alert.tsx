@@ -35,9 +35,10 @@ export function ConfirmLoanAlert({ loanId }: ConfirmLoanAlertProps) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 404) {
           toast.error("Empréstimo não encontrado, tente novamente.");
+        } else {
+          toast.error("Falha ao efetivar empréstimo, tente novamente.");
         }
       }
-      toast.error("Falha ao efetivar empréstimo, tente novamente.");
     }
   }
 
