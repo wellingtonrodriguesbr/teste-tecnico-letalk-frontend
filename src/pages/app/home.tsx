@@ -1,4 +1,4 @@
-import { LoanSimulation } from "@/components/loan-simulation.";
+import { LoanSimulation } from "@/components/loan-simulation";
 
 export function Home() {
   return (

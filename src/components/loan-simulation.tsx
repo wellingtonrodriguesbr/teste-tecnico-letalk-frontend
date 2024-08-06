@@ -1,5 +1,5 @@
 import { LoanInstallments } from "./loan-installments";
-import { LoanSimulationForm } from "./loan-simulation.form";
+import { LoanSimulationForm } from "./loan-simulation-form";
 
 export function LoanSimulation() {
   return (
