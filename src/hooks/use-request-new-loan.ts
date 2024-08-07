@@ -51,7 +51,7 @@ export function useRequestNewLoan() {
         behavior: "smooth",
       });
     }
-  }, [height, loan, isRequestNewLoanPending]);
+  }, [loan, isRequestNewLoanPending]);
 
   return { requestNewLoan, isRequestNewLoanPending };
 }
