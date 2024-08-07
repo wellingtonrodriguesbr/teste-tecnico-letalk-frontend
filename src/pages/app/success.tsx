@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 export function Success() {
   return (
-    <section className="flex flex-col items-center justify-center w-full px-4">
+    <section className="flex flex-col items-center justify-center w-full max-w-screen-md mx-auto px-4">
       <Confetti />
-      <h1 className="text-2xl md:text-5xl font-bold text-center leading-tight">
+      <h1 className="text-2xl md:text-5xl font-bold text-center leading-tight md:leading-tight">
         Parabéns, seu empréstimo foi confirmado com sucesso! 🎉
       </h1>
       <p className="text-base md:text-xl text-center mt-6">
