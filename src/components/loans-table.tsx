@@ -72,7 +72,9 @@ export function LoansTable() {
                     {formatCPF(loan.customerDocumentNumber)}
                   </TableCell>
                   <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
-                    {dayjs(loan.customerBirthDate).format("DD/MM/YYYY")}
+                    {dayjs(loan.customerBirthDate)
+                      .add(3, "hours")
+                      .format("DD/MM/YYYY")}
                   </TableCell>
                   <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {loan.customerState}
