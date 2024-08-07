@@ -20,20 +20,26 @@ interface LoanContextProviderProps {
 }
 
 interface LoanContextData {
-  loan: Loan;
+  loan: Loan | null;
   setLoan: (state: Loan) => void;
+  handleClearLoan: () => void;
 }
 
 export const LoanContext = createContext({} as LoanContextData);
 
 export function LoanContextProvider({ children }: LoanContextProviderProps) {
-  const [loan, setLoan] = useState<Loan>({} as Loan);
+  const [loan, setLoan] = useState<Loan | null>(null);
+
+  function handleClearLoan() {
+    setLoan(null);
+  }
 
   return (
     <LoanContext.Provider
       value={{
         loan,
         setLoan,
+        handleClearLoan,
       }}
     >
       {children}
@@ -42,10 +48,11 @@ export function LoanContextProvider({ children }: LoanContextProviderProps) {
 }
 
 export function useLoan(): LoanContextData {
-  const { loan, setLoan } = useContext(LoanContext);
+  const { loan, setLoan, handleClearLoan } = useContext(LoanContext);
 
   return {
     loan,
     setLoan,
+    handleClearLoan,
   };
 }
