@@ -81,7 +81,7 @@ export function LoansTable() {
                     {formatCurrency(loan.loanAmountRequested?.toString())}
                   </TableCell>
                   <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
-                    {parseFloat((loan.interestRate * 100).toFixed(1))}%
+                    {parseFloat((loan.interestRate * 100).toFixed(1))}% ao mês
                   </TableCell>
                   <TableCell className="text-app-gray-800 font-normal text-sm md:text-base text-nowrap">
                     {formatCurrency(loan.desiredInstallmentAmount?.toString())}
