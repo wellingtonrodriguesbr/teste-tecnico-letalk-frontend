@@ -11,7 +11,7 @@ export function LoanInfo() {
 
   const formattedLoanDetails = {
     loanAmountRequested: formatCurrency(loan.loanAmountRequested?.toString()),
-    interestRate: `${parseFloat((loan.interestRate * 100).toFixed(1))}%`,
+    interestRate: `${parseFloat((loan.interestRate * 100).toFixed(1))}% ao mês`,
     desiredInstallmentAmount: formatCurrency(
       loan.desiredInstallmentAmount?.toString()
     ),
