@@ -1,6 +1,7 @@
 import { Loan, useLoan } from "@/contexts/loan-context";
 import { api } from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useWindowSize } from "react-use";
 
 interface RequestNewLoanProps {
@@ -17,7 +18,7 @@ interface RequestNewLoanResponse {
 
 export function useRequestNewLoan() {
   const { height } = useWindowSize();
-  const { setLoan } = useLoan();
+  const { loan, setLoan } = useLoan();
 
   const { mutateAsync: requestNewLoan, isPending: isRequestNewLoanPending } =
     useMutation({
@@ -40,12 +41,17 @@ export function useRequestNewLoan() {
     });
 
     setLoan(data.loan);
-    window.scrollTo({
-      top: (height * 2) / 4,
-      behavior: "smooth",
-    });
     return data;
   }
+
+  useEffect(() => {
+    if (loan && !isRequestNewLoanPending) {
+      window.scrollTo({
+        top: (height * 2) / 4,
+        behavior: "smooth",
+      });
+    }
+  }, [height, loan, isRequestNewLoanPending]);
 
   return { requestNewLoan, isRequestNewLoanPending };
 }
