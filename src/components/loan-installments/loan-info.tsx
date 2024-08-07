@@ -5,6 +5,10 @@ import { formatCurrency } from "@/utils/format-currency";
 export function LoanInfo() {
   const { loan } = useLoan();
 
+  if (!loan) {
+    return null;
+  }
+
   const formattedLoanDetails = {
     loanAmountRequested: formatCurrency(loan.loanAmountRequested?.toString()),
     interestRate: `${parseFloat((loan.interestRate * 100).toFixed(1))}%`,
