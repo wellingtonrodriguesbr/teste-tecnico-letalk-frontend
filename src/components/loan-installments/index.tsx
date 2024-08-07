@@ -3,33 +3,27 @@ import { LoanInstallmentsTable } from "./loan-installments-table";
 import { useLoan } from "@/contexts/loan-context";
 import { useGetInstallmentsByLoan } from "@/hooks/use-get-installments-by-loan";
 import { ConfirmLoanAlert } from "./confirm-loan-alert";
-import { Skeleton } from "../ui/skeleton";
+import { LoanInstallmentsLoading } from "../loaders/loan-installments-loading";
 
 export function LoanInstallments() {
   const { loan } = useLoan();
   const { installments, isGetInstallmentsPending, isFetching } =
     useGetInstallmentsByLoan({
-      loanId: loan.id,
+      loanId: loan?.id ?? "",
     });
+
+  if (!loan) {
+    return null;
+  }
 
   return (
     <>
       {isFetching && isGetInstallmentsPending ? (
-        <div className="flex flex-col gap-8 items-center justify-center mt-[4.5rem]">
-          <Skeleton className="w-80 h-6" />
-          <Skeleton className="w-full md:w-[967px] h-96" />
-        </div>
+        <LoanInstallmentsLoading />
       ) : null}
 
       {!isGetInstallmentsPending && installments ? (
-        <section
-          data-hidden={
-            !isGetInstallmentsPending && installments
-              ? installments.length === 0
-              : true
-          }
-          className="w-full mt-[4.5rem] data-[hidden=true]:hidden"
-        >
+        <section className="w-full mt-[4.5rem]">
           <header className="flex items-center justify-center">
             <h3 className="font-bold text-lg md:text-xl mb-[1.625rem] text-center">
               Veja a simulação para o seu empréstimo antes de efetivar

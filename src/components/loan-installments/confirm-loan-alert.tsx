@@ -10,6 +10,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { useLoan } from "@/contexts/loan-context";
 import { useConfirmLoan } from "@/hooks/use-confirm-loan";
 import { AxiosError } from "axios";
 import { ArrowRight, Loader2 } from "lucide-react";
@@ -23,13 +24,14 @@ interface ConfirmLoanAlertProps {
 export function ConfirmLoanAlert({ loanId }: ConfirmLoanAlertProps) {
   const navigate = useNavigate();
   const { confirmLoan, isConfirmLoanPending } = useConfirmLoan();
+  const { handleClearLoan } = useLoan();
 
   async function handleConfirmLoan() {
     try {
       await confirmLoan({
         loanId,
       });
-
+      handleClearLoan();
       navigate("/sucesso");
     } catch (error) {
       if (error instanceof AxiosError) {

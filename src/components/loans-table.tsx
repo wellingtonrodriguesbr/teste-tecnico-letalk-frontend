@@ -25,6 +25,7 @@ export function LoansTable() {
           <p>Nenhum empréstimo encontrado.</p>
         </div>
       ) : null}
+
       {isGetConfirmedLoansPending ? <LoansTableLoading /> : null}
 
       {!isGetConfirmedLoansPending && confirmedloans.length > 0 ? (
